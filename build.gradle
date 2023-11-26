@@ -1,0 +1,30 @@
+plugins {
+    id 'java'
+}
+
+group = 'com.b1nd'
+version = '0.0.1-SNAPSHOT'
+
+java {
+    sourceCompatibility = '11'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.apache.httpcomponents.client5:httpclient5:5.2.1'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.12.3'
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test:2.6.4'
+    testImplementation 'org.assertj:assertj-core:3.24.2'
+
+    test {
+        useJUnitPlatform()
+    }
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
