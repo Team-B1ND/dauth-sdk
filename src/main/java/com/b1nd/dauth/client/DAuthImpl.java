@@ -24,7 +24,7 @@ public class DAuthImpl implements DAuth {
 
     @Override
     public DAuthTokenInfo issueToken(final String code) {
-        final ObjectNode node = ObjectHelper.INSTANCE.createNode("code", code, "client_id", client.id(), "client_secret", client.secret());
+        final ObjectNode node = ObjectHelper.createNode("code", code, "client_id", client.id(), "client_secret", client.secret());
 
         final ClassicHttpRequest request = HttpRequestUtil.create(serverUri.tokenServer(), node);
 
@@ -33,7 +33,7 @@ public class DAuthImpl implements DAuth {
 
     @Override
     public DAuthAccessTokenInfo reissueAccessToken(final String refreshToken) {
-        final ObjectNode node = ObjectHelper.INSTANCE.createNode("refreshToken", refreshToken, "clientId", client.id());
+        final ObjectNode node = ObjectHelper.createNode("refreshToken", refreshToken, "clientId", client.id());
 
         final ClassicHttpRequest request = HttpRequestUtil.create(serverUri.reissueTokenServer(), node);
 

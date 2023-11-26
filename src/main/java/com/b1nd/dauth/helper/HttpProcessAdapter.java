@@ -32,7 +32,7 @@ public final class HttpProcessAdapter extends HttpProcessor {
 
     @Override
     public <T> T convert(final String response, final Class<T> target) {
-        return ObjectHelper.INSTANCE.convert(response, target);
+        return ObjectHelper.convert(response, target);
     }
 
 }
