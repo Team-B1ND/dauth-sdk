@@ -8,7 +8,7 @@ DAuth 공식문서 : https://dauth.b1nd.com
 ## Gradle
 ```gradle
 // build.gradle
-implementation 'com.github.Team-B1ND:DAuth-SDK:v1.0.0'
+implementation 'com.github.Team-B1ND:DAuth-SDK:v?.?.?'
 ```
 
 # Sample (for Spring)
