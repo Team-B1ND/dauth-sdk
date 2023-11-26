@@ -6,15 +6,11 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
-public final class ObjectHelper {
+public abstract class ObjectHelper {
 
-    public static final ObjectHelper INSTANCE = new ObjectHelper();
     private static final ObjectMapper mapper = new ObjectMapper();
 
-    private ObjectHelper() {
-    }
-
-    public <T> T convert(final String response, final Class<T> target) {
+    public static  <T> T convert(final String response, final Class<T> target) {
         try {
             return mapper.readValue(response, target);
         } catch (JsonProcessingException e) {
@@ -22,7 +18,7 @@ public final class ObjectHelper {
         }
     }
 
-    public ObjectNode createNode(final String... keyValuePairs) {
+    public static ObjectNode createNode(final String... keyValuePairs) {
         Assert.notOdd(keyValuePairs.length, "Pairs");
 
         final ObjectNode node = mapper.createObjectNode();
@@ -30,7 +26,7 @@ public final class ObjectHelper {
         return fillOut(node, keyValuePairs);
     }
 
-    private ObjectNode fillOut(final ObjectNode node, final String... keyValuePairs) {
+    private static ObjectNode fillOut(final ObjectNode node, final String... keyValuePairs) {
         for (int i = 0; i<keyValuePairs.length; i+=2) {
             node.put(keyValuePairs[i], keyValuePairs[i+1]);
         }
