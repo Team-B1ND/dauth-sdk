@@ -13,7 +13,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.github.Team-B1ND:DAuth-SDK:v?.?.?' //추가
+    implementation 'com.github.Team-B1ND:DAuth-SDK:v1.0.0' //추가
 }
 ```
 
