@@ -1,5 +1,6 @@
 package com.b1nd.dauth.helper;
 
+import com.b1nd.dauth.util.ObjectUtil;
 import org.apache.hc.client5.http.classic.HttpClient;
 import org.apache.hc.client5.http.config.RequestConfig;
 import org.apache.hc.client5.http.impl.classic.HttpClientBuilder;
@@ -32,7 +33,7 @@ public final class HttpProcessAdapter extends HttpProcessor {
 
     @Override
     public <T> T convert(final String response, final Class<T> target) {
-        return ObjectHelper.convert(response, target);
+        return ObjectUtil.convert(response, target);
     }
 
 }

@@ -1,6 +1,8 @@
 package com.b1nd.dauth.client;
 
 import com.b1nd.dauth.DAuth;
+import com.b1nd.dauth.helper.HttpProcessAdapter;
+import com.b1nd.dauth.helper.HttpProcessor;
 
 public final class DAuthBuilder {
 
@@ -48,10 +50,11 @@ public final class DAuthBuilder {
     }
 
     public DAuth build() {
+        final HttpProcessor httpProcessor = new HttpProcessAdapter();
         final Client client = new Client(clientId, clientSecret);
         final ServerUri serverUri = new ServerUri(tokenServerUri, reissueTokenServerUri, userServerUri);
 
-        return new DAuthImpl(client, serverUri);
+        return new DAuthImpl(httpProcessor, client, serverUri);
     }
 
 }

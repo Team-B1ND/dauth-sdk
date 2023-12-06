@@ -1,12 +1,11 @@
-package com.b1nd.dauth.helper;
+package com.b1nd.dauth.util;
 
 import com.b1nd.dauth.DAuthException;
-import com.b1nd.dauth.util.Assert;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
-public abstract class ObjectHelper {
+public abstract class ObjectUtil {
 
     private static final ObjectMapper mapper = new ObjectMapper();
 
