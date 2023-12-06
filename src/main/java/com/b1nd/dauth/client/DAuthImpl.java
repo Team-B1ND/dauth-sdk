@@ -6,7 +6,7 @@ import com.b1nd.dauth.client.response.DAuthAccessTokenInfo;
 import com.b1nd.dauth.client.response.DAuthUserInfo;
 import com.b1nd.dauth.helper.HttpProcessAdapter;
 import com.b1nd.dauth.helper.HttpProcessor;
-import com.b1nd.dauth.helper.ObjectHelper;
+import com.b1nd.dauth.util.ObjectUtil;
 import com.b1nd.dauth.util.HttpRequestUtil;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.apache.hc.core5.http.*;
@@ -24,7 +24,7 @@ public class DAuthImpl implements DAuth {
 
     @Override
     public DAuthTokenInfo issueToken(final String code) {
-        final ObjectNode node = ObjectHelper.createNode("code", code, "client_id", client.id(), "client_secret", client.secret());
+        final ObjectNode node = ObjectUtil.createNode("code", code, "client_id", client.id(), "client_secret", client.secret());
 
         final ClassicHttpRequest request = HttpRequestUtil.create(serverUri.tokenServer(), node);
 
@@ -33,7 +33,7 @@ public class DAuthImpl implements DAuth {
 
     @Override
     public DAuthAccessTokenInfo reissueAccessToken(final String refreshToken) {
-        final ObjectNode node = ObjectHelper.createNode("refreshToken", refreshToken, "clientId", client.id());
+        final ObjectNode node = ObjectUtil.createNode("refreshToken", refreshToken, "clientId", client.id());
 
         final ClassicHttpRequest request = HttpRequestUtil.create(serverUri.reissueTokenServer(), node);
 
