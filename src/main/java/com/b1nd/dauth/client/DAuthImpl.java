@@ -4,7 +4,6 @@ import com.b1nd.dauth.DAuth;
 import com.b1nd.dauth.client.response.DAuthTokenInfo;
 import com.b1nd.dauth.client.response.DAuthAccessTokenInfo;
 import com.b1nd.dauth.client.response.DAuthUserInfo;
-import com.b1nd.dauth.helper.HttpProcessAdapter;
 import com.b1nd.dauth.helper.HttpProcessor;
 import com.b1nd.dauth.util.ObjectUtil;
 import com.b1nd.dauth.util.HttpRequestUtil;
@@ -13,11 +12,12 @@ import org.apache.hc.core5.http.*;
 
 public class DAuthImpl implements DAuth {
 
-    private static final HttpProcessor httpProcessor = new HttpProcessAdapter();
+    private final HttpProcessor httpProcessor;
     private final Client client;
     private final ServerUri serverUri;
 
-    DAuthImpl(final Client client, final ServerUri serverUri) {
+    DAuthImpl(final HttpProcessor httpProcessor, final Client client, final ServerUri serverUri) {
+        this.httpProcessor = httpProcessor;
         this.client = client;
         this.serverUri = serverUri;
     }
