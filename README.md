@@ -13,7 +13,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.github.Team-B1ND:DAuth-SDK:v1.0.0' //추가
+    implementation 'com.github.Team-B1ND:DAuth-SDK:v2.0.0' //추가
 }
 ```
 
@@ -26,9 +26,6 @@ public DAuth dauth() {
     return DAuthBuilder.create()
         .clientId(CLIENT_ID)
         .clientSecret(CLIENT_SECRET)
-        .tokenServerUri(TOKEN_SERVER_URI)
-        .reissueTokenServerUri(REISSUE_TOKEN_SERVER_URI)
-        .userServerUri(USER_SERVER_URI)
         .build();
 }
 ```
