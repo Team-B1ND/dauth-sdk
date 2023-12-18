@@ -8,9 +8,6 @@ public final class DAuthBuilder {
 
     private String clientId;
     private String clientSecret;
-    private String tokenServerUri;
-    private String reissueTokenServerUri;
-    private String userServerUri;
 
     private DAuthBuilder() {
     }
@@ -31,30 +28,11 @@ public final class DAuthBuilder {
         return this;
     }
 
-    public DAuthBuilder tokenServerUri(final String uri) {
-        tokenServerUri = uri;
-
-        return this;
-    }
-
-    public DAuthBuilder reissueTokenServerUri(final String uri) {
-        reissueTokenServerUri = uri;
-
-        return this;
-    }
-
-    public DAuthBuilder userServerUri(final String uri) {
-        userServerUri = uri;
-
-        return this;
-    }
-
     public DAuth build() {
         final HttpProcessor httpProcessor = new HttpProcessAdapter();
         final Client client = new Client(clientId, clientSecret);
-        final ServerUri serverUri = new ServerUri(tokenServerUri, reissueTokenServerUri, userServerUri);
 
-        return new DAuthImpl(httpProcessor, client, serverUri);
+        return new DAuthImpl(httpProcessor, client);
     }
 
 }
