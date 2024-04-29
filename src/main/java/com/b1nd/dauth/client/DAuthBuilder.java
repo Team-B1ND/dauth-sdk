@@ -8,6 +8,7 @@ public final class DAuthBuilder {
 
     private String clientId;
     private String clientSecret;
+    private String redirectUrl;
 
     private DAuthBuilder() {
     }
@@ -18,19 +19,22 @@ public final class DAuthBuilder {
 
     public DAuthBuilder clientId(final String clientId) {
         this.clientId = clientId;
-
         return this;
     }
 
     public DAuthBuilder clientSecret(final String clientSecret) {
         this.clientSecret = clientSecret;
+        return this;
+    }
 
+    public DAuthBuilder redirectUrl(final String redirectUrl) {
+        this.redirectUrl = redirectUrl;
         return this;
     }
 
     public DAuth build() {
         final HttpProcessor httpProcessor = new HttpProcessAdapter();
-        final Client client = new Client(clientId, clientSecret);
+        final Client client = new Client(clientId, clientSecret, redirectUrl);
 
         return new DAuthImpl(httpProcessor, client);
     }

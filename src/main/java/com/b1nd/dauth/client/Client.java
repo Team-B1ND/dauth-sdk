@@ -6,13 +6,16 @@ public class Client {
 
     private final String id;
     private final String secret;
+    private final String redirectUrl;
 
-    Client(final String id, final String secret) {
+    Client(final String id, final String secret, final String redirectUrl) {
         Assert.notBlank(id, "ClientId");
         Assert.notBlank(secret, "ClientSecret");
+        Assert.notBlank(redirectUrl, "RedirectUrl");
 
         this.id = id;
         this.secret = secret;
+        this.redirectUrl = redirectUrl;
     }
 
     public String id() {
@@ -21,6 +24,10 @@ public class Client {
 
     public String secret() {
         return secret;
+    }
+
+    public String redirectUrl() {
+        return redirectUrl;
     }
 
 }

@@ -1,6 +1,7 @@
 package com.b1nd.dauth.client;
 
 import com.b1nd.dauth.DAuth;
+import com.b1nd.dauth.client.response.DAuthCodeInfo;
 import com.b1nd.dauth.client.response.DAuthTokenInfo;
 import com.b1nd.dauth.client.response.DAuthAccessTokenInfo;
 import com.b1nd.dauth.client.response.DAuthUserInfo;
@@ -16,7 +17,10 @@ public class DAuthImpl implements DAuth {
 
     private final HttpProcessor httpProcessor;
     private final Client client;
-    private static final String REFRESH = "/refresh";
+    private static final String LOGIN = "/auth/login";
+    private static final String ISSUE_TOKEN = "/token";
+    private static final String REISSUE_TOKEN = "/token/refresh";
+    private static final String USER = "/user";
 
     DAuthImpl(final HttpProcessor httpProcessor, final Client client) {
         this.httpProcessor = httpProcessor;
@@ -24,10 +28,18 @@ public class DAuthImpl implements DAuth {
     }
 
     @Override
+    public DAuthCodeInfo issueCode(String id, String password) {
+        final ObjectNode node = ObjectUtil.createNode("id", id, "pw", password, "clientId", client.id(), "redirectUrl", client.redirectUrl());
+        final ClassicHttpRequest request = HttpRequestUtil.create(AUTH_SERVER.get() + LOGIN, node);
+
+        return httpProcessor.execute(request, DAuthCodeInfo.class);
+    }
+
+    @Override
     public DAuthTokenInfo issueToken(final String code) {
         final ObjectNode node = ObjectUtil.createNode("code", code, "client_id", client.id(), "client_secret", client.secret());
-
-        final ClassicHttpRequest request = HttpRequestUtil.create(TOKEN_SERVER.get(), node);
+        final String url = AUTH_SERVER.get() + ISSUE_TOKEN;
+        final ClassicHttpRequest request = HttpRequestUtil.create(url, node);
 
         return httpProcessor.execute(request, DAuthTokenInfo.class);
     }
@@ -35,17 +47,16 @@ public class DAuthImpl implements DAuth {
     @Override
     public DAuthAccessTokenInfo reissueAccessToken(final String refreshToken) {
         final ObjectNode node = ObjectUtil.createNode("refreshToken", refreshToken, "clientId", client.id());
-
-        final String reissueAccessTokenUri = TOKEN_SERVER.get() + REFRESH;
-
-        final ClassicHttpRequest request = HttpRequestUtil.create(reissueAccessTokenUri, node);
+        final String url = AUTH_SERVER.get() + REISSUE_TOKEN;
+        final ClassicHttpRequest request = HttpRequestUtil.create(url, node);
 
         return httpProcessor.execute(request, DAuthAccessTokenInfo.class);
     }
 
     @Override
     public DAuthUserInfo getUser(final String accessToken) {
-        final ClassicHttpRequest request = HttpRequestUtil.create(USER_SERVER.get(), accessToken);
+        final String url = RESOURCE_SERVER.get() + USER;
+        final ClassicHttpRequest request = HttpRequestUtil.create(url, accessToken);
 
         return httpProcessor.execute(request, DAuthUserInfo.class);
     }

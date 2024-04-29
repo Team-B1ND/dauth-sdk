@@ -2,8 +2,8 @@ package com.b1nd.dauth.client;
 
 enum DodamUri {
 
-    USER_SERVER("http://open.dodam.b1nd.com/api/user"),
-    TOKEN_SERVER("http://dauth.b1nd.com/api/token");
+    RESOURCE_SERVER("http://open.dodam.b1nd.com/api"),
+    AUTH_SERVER("https://dauth.b1nd.com/api");
 
     private final String value;
 
