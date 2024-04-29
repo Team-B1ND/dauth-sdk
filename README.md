@@ -9,11 +9,11 @@ DAuth 공식문서 : https://dauth.b1nd.com
 ```gradle
 // build.gradle
 repositories {
-    maven { url 'https://jitpack.io' } //추가
+    maven { url 'https://jitpack.io' }
 }
 
 dependencies {
-    implementation 'com.github.Team-B1ND:DAuth-SDK:v1.0.1' //추가
+    implementation 'com.github.Team-B1ND:DAuth-SDK:{version}'
 }
 ```
 
@@ -26,6 +26,7 @@ public DAuth dauth() {
     return DAuthBuilder.create()
         .clientId(CLIENT_ID)
         .clientSecret(CLIENT_SECRET)
+        .redirectUrl(REDIRECT_URL)
         .build();
 }
 ```
@@ -40,6 +41,25 @@ public class Sample {
     public Sample(final DAuth dauth) {
         this.dauth = dauth;
     }
+
+}
+```
+## Code 발급
+```java
+final DAuthCodeInfo codeInfo = dAuth.issueCode(id, password);
+```
+```java
+public final class DAuthCodeInfo {
+
+    private Location location;
+
+    //getters
+
+}
+
+class Location {
+
+    String value;
 
 }
 ```
